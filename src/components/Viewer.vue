@@ -7,7 +7,9 @@ import {
   BoxGeometry, MeshNormalMaterial, Mesh,
 } from 'three';
 import { mapState, mapMutations } from 'vuex';
-import { SET_RENDERER_SIZE, ADD_OBJECT, UPDATE_ASPECT_OF_MAIN_CAMERA, REMOVE_ALL_OBJECTS } from '../stores/types';
+import {
+  SET_RENDERER_SIZE, ADD_OBJECT, UPDATE_ASPECT_OF_MAIN_CAMERA, REMOVE_ALL_OBJECTS,
+} from '../stores/types';
 
 export default {
   name: 'Viewer',
