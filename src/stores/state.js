@@ -1,5 +1,3 @@
-export default function () {
-  return {
-    scene: null,
-  };
-}
+export default {
+  scene: null,
+};
