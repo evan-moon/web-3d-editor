@@ -5,5 +5,8 @@
 <script>
 export default {
   name: 'Viewer',
+  mounted () {
+    console.log(1);
+  },
 };
 </script>

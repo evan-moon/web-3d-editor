@@ -1,36 +1,29 @@
 <template>
-  <v-app>
-    <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        text
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-app-bar>
-
-    <v-content>
-      <Viewer />
-    </v-content>
-  </v-app>
+<v-app>
+  <v-content>
+    <v-container :fluid="true">
+      <v-row :no-gutters="true">
+        <v-col>
+          <Viewer />
+        </v-col>
+        <v-col cols="auto">
+          <Toolbar />
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-content>
+</v-app>
 </template>
 
 <script>
 import Viewer from './components/Viewer.vue';
+import Toolbar from './components/Toolbar.vue';
 
 export default {
   name: 'App',
   components: {
     Viewer,
+    Toolbar,
   },
-  data: () => ({
-    //
-  }),
 };
 </script>
