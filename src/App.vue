@@ -3,10 +3,10 @@
   <v-content>
     <v-container v-if="!isLoading" :fluid="true">
       <v-row :no-gutters="true">
-        <v-col>
+        <v-col cols="9">
           <Viewer />
         </v-col>
-        <v-col cols="auto">
+        <v-col cols="3">
           <Toolbar />
         </v-col>
       </v-row>
@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import { Scene } from 'three';
+import { Scene, WebGLRenderer, PerspectiveCamera } from 'three';
 import { mapMutations } from 'vuex';
-import { SET_SCENE } from './stores/types';
+import { SET_SCENE, SET_RENDERER, SET_MAIN_CAMERA } from './stores/types';
 import Viewer from './components/Viewer.vue';
 import Toolbar from './components/Toolbar.vue';
 
@@ -37,12 +37,26 @@ export default {
   methods: {
     ...mapMutations({
       setScene: SET_SCENE,
+      setRenderer: SET_RENDERER,
+      setMainCamera: SET_MAIN_CAMERA,
     }),
   },
-  mounted () {
+  beforeMount () {
     const scene = new Scene();
+    const renderer = new WebGLRenderer({ antialias: true });
+    const camera = new PerspectiveCamera(70, 1, 0.01, 10);
+    camera.position.z = 1;
+
     this.setScene(scene);
+    this.setRenderer(renderer);
+    this.setMainCamera(camera);
     this.isLoading = false;
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  .container {
+    padding: 0;
+  }
+</style>
