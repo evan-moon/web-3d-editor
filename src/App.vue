@@ -17,9 +17,13 @@
 </template>
 
 <script>
-import { Scene, WebGLRenderer, PerspectiveCamera } from 'three';
 import { mapMutations } from 'vuex';
-import { SET_SCENE, SET_RENDERER, SET_MAIN_CAMERA } from './stores/types';
+import {
+  SET_SCENE,
+  SET_RENDERER,
+  SET_MAIN_CAMERA,
+  SET_CONTROLS,
+} from './stores/types';
 import Viewer from './components/Viewer.vue';
 import Toolbar from './components/Toolbar.vue';
 
@@ -39,17 +43,14 @@ export default {
       setScene: SET_SCENE,
       setRenderer: SET_RENDERER,
       setMainCamera: SET_MAIN_CAMERA,
+      setControls: SET_CONTROLS,
     }),
   },
   beforeMount () {
-    const scene = new Scene();
-    const renderer = new WebGLRenderer({ antialias: true });
-    const camera = new PerspectiveCamera(70, 1, 0.01, 10);
-    camera.position.z = 1;
-
-    this.setScene(scene);
-    this.setRenderer(renderer);
-    this.setMainCamera(camera);
+    this.setScene();
+    this.setRenderer();
+    this.setMainCamera();
+    this.setControls();
     this.isLoading = false;
   },
 };

@@ -3,12 +3,12 @@
 </template>
 
 <script>
-import {
-  BoxGeometry, MeshNormalMaterial, Mesh,
-} from 'three';
 import { mapState, mapMutations } from 'vuex';
 import {
-  SET_RENDERER_SIZE, ADD_OBJECT, UPDATE_ASPECT_OF_MAIN_CAMERA, REMOVE_ALL_OBJECTS,
+  SET_RENDERER_SIZE,
+  ADD_OBJECT,
+  UPDATE_ASPECT_OF_MAIN_CAMERA,
+  REMOVE_ALL_OBJECTS,
 } from '../stores/types';
 
 export default {
@@ -18,15 +18,13 @@ export default {
       scene: state => state.scene,
       renderer: state => state.renderer,
       mainCamera: state => state.mainCamera,
+      controls: state => state.controls,
     }),
   },
   methods: {
     animate () {
       requestAnimationFrame(this.animate);
-      const mesh = this.scene.getObjectByName('tester');
-      mesh.rotation.x += 0.01;
-      mesh.rotation.y += 0.02;
-
+      this.controls.update();
       this.renderer.render(this.scene, this.mainCamera);
     },
     ...mapMutations({
@@ -38,12 +36,6 @@ export default {
   },
   mounted () {
     this.removeAllObjects();
-
-    const geometry = new BoxGeometry(0.2, 0.2, 0.2);
-    const material = new MeshNormalMaterial();
-    const mesh = new Mesh(geometry, material);
-    mesh.name = 'tester';
-    this.addObject(mesh);
 
     const width = this.$el.clientWidth;
     const height = this.$el.clientHeight;

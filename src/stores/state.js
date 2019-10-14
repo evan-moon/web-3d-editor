@@ -3,4 +3,5 @@ export default {
   mainCamera: null,
   renderer: null,
   currentObjects: [],
+  controls: null,
 };
