@@ -12,7 +12,9 @@ import {
   REMOVE_ALL_OBJECTS,
   REMOVE_OBJECT_BY_NAME,
   SET_CONTROLS,
-  ADD_AMBIENT_LIGHT, ADD_DIRECTIONAL_LIGHT,
+  ADD_AMBIENT_LIGHT,
+  ADD_DIRECTIONAL_LIGHT,
+  SET_SHOW_GRID_HELPER
 } from './types';
 
 export default {
@@ -29,7 +31,9 @@ export default {
       state.scene.remove(oldCamera);
     }
 
-    const newCamera = new THREE.PerspectiveCamera(70, 1, 0.01, 10);
+    const newCamera = new THREE.PerspectiveCamera(70, 1, 0.01, 1000);
+    newCamera.position.x = 1;
+    newCamera.position.y = 1;
     newCamera.position.z = 1;
     state.mainCamera = newCamera;
   },
@@ -42,7 +46,7 @@ export default {
   },
   [SET_RENDERER] (state) {
     state.renderer = new THREE.WebGLRenderer({ antialias: true });
-    state.renderer.setClearColor(new THREE.Color(0xdddddd), 1);
+    state.renderer.setClearColor(new THREE.Color(0x222222), 1);
   },
   [DESTROY_RENDERER] (state) {
     state.renderer = null;
@@ -75,7 +79,7 @@ export default {
     state.scene.add(object);
   },
   [ADD_AMBIENT_LIGHT] (state) {
-    const light = new THREE.AmbientLight(0xffffff);
+    const light = new THREE.AmbientLight(0x333333);
     state.scene.add(light);
   },
   [ADD_DIRECTIONAL_LIGHT] (state) {
@@ -97,5 +101,16 @@ export default {
     }
     const object = state.scene.getObjectByName(name);
     state.scene.remove(object);
+  },
+  [SET_SHOW_GRID_HELPER] (state, isShowGridHelper) {
+    state.scene.isShowGridHelper = isShowGridHelper;
+    if (isShowGridHelper) {
+      const gridHelper = new THREE.GridHelper(20, 100);
+      gridHelper.name = 'gridHelper';
+      state.scene.add(gridHelper);
+    } else {
+      const gridHelper = state.scene.getObjectByName('gridHelper');
+      state.scene.remove(gridHelper);
+    }
   },
 };

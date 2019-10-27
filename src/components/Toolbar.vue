@@ -4,6 +4,7 @@
     <v-col cols="12">
       <ModelUploadButton @upload="onUploadModel" />
       <LightAddButton />
+      <GridHelperSwitch />
     </v-col>
   </v-row>
 </div>
@@ -14,10 +15,11 @@ import { mapMutations } from 'vuex';
 import { ADD_OBJECT } from '../stores/types';
 import ModelUploadButton from './ModelUploadButton.vue';
 import LightAddButton from './LightAddButton.vue';
+import GridHelperSwitch from './GridHelperSwitch.vue';
 
 export default {
   name: 'Toolbar',
-  components: { ModelUploadButton, LightAddButton },
+  components: { ModelUploadButton, LightAddButton, GridHelperSwitch },
   methods: {
     onUploadModel (object3d) {
       this.addObject(object3d);

@@ -4,4 +4,5 @@ export default {
   renderer: null,
   currentObjects: [],
   controls: null,
+  isShowGridHelper: true,
 };
