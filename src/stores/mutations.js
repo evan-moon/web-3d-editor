@@ -14,7 +14,7 @@ import {
   SET_CONTROLS,
   ADD_AMBIENT_LIGHT,
   ADD_DIRECTIONAL_LIGHT,
-  SET_SHOW_GRID_HELPER
+  SET_SHOW_GRID_HELPER,
 } from './types';
 
 export default {
