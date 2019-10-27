@@ -12,6 +12,7 @@ import {
   REMOVE_ALL_OBJECTS,
   REMOVE_OBJECT_BY_NAME,
   SET_CONTROLS,
+  ADD_AMBIENT_LIGHT, ADD_DIRECTIONAL_LIGHT,
 } from './types';
 
 export default {
@@ -41,6 +42,7 @@ export default {
   },
   [SET_RENDERER] (state) {
     state.renderer = new THREE.WebGLRenderer({ antialias: true });
+    state.renderer.setClearColor(new THREE.Color(0xdddddd), 1);
   },
   [DESTROY_RENDERER] (state) {
     state.renderer = null;
@@ -71,6 +73,14 @@ export default {
     }
     console.log('object is added -> ', object);
     state.scene.add(object);
+  },
+  [ADD_AMBIENT_LIGHT] (state) {
+    const light = new THREE.AmbientLight(0xffffff);
+    state.scene.add(light);
+  },
+  [ADD_DIRECTIONAL_LIGHT] (state) {
+    const light = new THREE.DirectionalLight(0xffffff);
+    state.scene.add(light);
   },
   [REMOVE_ALL_OBJECTS] (state) {
     const { scene } = state;

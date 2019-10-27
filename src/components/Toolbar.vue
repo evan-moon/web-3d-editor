@@ -3,6 +3,7 @@
   <v-row>
     <v-col cols="12">
       <ModelUploadButton @upload="onUploadModel" />
+      <LightAddButton />
     </v-col>
   </v-row>
 </div>
@@ -12,11 +13,11 @@
 import { mapMutations } from 'vuex';
 import { ADD_OBJECT } from '../stores/types';
 import ModelUploadButton from './ModelUploadButton.vue';
-
+import LightAddButton from './LightAddButton.vue';
 
 export default {
   name: 'Toolbar',
-  components: { ModelUploadButton },
+  components: { ModelUploadButton, LightAddButton },
   methods: {
     onUploadModel (object3d) {
       this.addObject(object3d);
