@@ -25,6 +25,11 @@ export default {
       reader.readAsBinaryString(file);
       reader.onloadend = () => {
         const model = loader.parse(reader.result);
+        model.children = model.children.map((child) => {
+          const newChild = child;
+          newChild.userData.selectable = true;
+          return newChild;
+        });
         this.$emit('upload', model);
       };
     },
