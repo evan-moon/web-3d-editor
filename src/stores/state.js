@@ -5,4 +5,5 @@ export default {
   currentObjects: [],
   controls: null,
   isShowGridHelper: true,
+  selectedObject: null,
 };

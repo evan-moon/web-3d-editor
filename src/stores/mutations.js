@@ -15,6 +15,7 @@ import {
   ADD_AMBIENT_LIGHT,
   ADD_DIRECTIONAL_LIGHT,
   SET_SHOW_GRID_HELPER,
+  SET_SELECTED_OBJECT,
 } from './types';
 
 export default {
@@ -46,6 +47,7 @@ export default {
   },
   [SET_RENDERER] (state) {
     state.renderer = new THREE.WebGLRenderer({ antialias: true });
+    state.renderer.setPixelRatio(window.devicePixelRatio);
     state.renderer.setClearColor(new THREE.Color(0x222222), 1);
   },
   [DESTROY_RENDERER] (state) {
@@ -111,6 +113,13 @@ export default {
     } else {
       const gridHelper = state.scene.getObjectByName('gridHelper');
       state.scene.remove(gridHelper);
+    }
+  },
+  [SET_SELECTED_OBJECT] (state, object) {
+    if (object && object.userData.selectable) {
+      const boxHelper = new THREE.BoxHelper(object, 0xffff00);
+      state.scene.add(boxHelper);
+      state.selectedObject = object;
     }
   },
 };
