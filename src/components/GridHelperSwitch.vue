@@ -1,5 +1,7 @@
 <template>
   <v-switch
+    label="grid"
+    :dark="true"
     :value="isShowGridHelper"
     @change="onChange">
   </v-switch>
