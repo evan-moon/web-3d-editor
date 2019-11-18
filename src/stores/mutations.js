@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import OrbitControlsFactory from 'three-orbit-controls';
+import TransformControlsFactory from 'three-transform-controls';
 import {
   SET_SCENE,
   DESTROY_SCENE,
@@ -17,6 +18,8 @@ import {
   SET_SHOW_GRID_HELPER,
   SET_SELECTED_OBJECT,
 } from './types';
+
+const TransformControls = TransformControlsFactory(THREE);
 
 export default {
   [SET_SCENE] (state) {
@@ -115,16 +118,31 @@ export default {
     }
   },
   [SET_SELECTED_OBJECT] (state, object) {
+    /**
+     * @TODO 너무 함수 내에 책임이 많음. 추상화 후 책임을 분리해야한다.
+     * TransformControls와 BoxHelper를 뜯어내는 것이 좋을 듯. 이 친구들 초기화하는 것도 여기저기서 하는게 아니라 한 곳에서 해서 export 하도록 변경
+     */
     if (!object || !object.userData.selectable) {
       return;
     }
 
     const boxHelperName = 'boxHelper';
-    state.scene.children = state.scene.children.filter(child => child.name !== boxHelperName);
+    const transformControlsName = 'transformControls';
+    state.scene.children = state.scene.children.filter((child) => {
+      const arr = [boxHelperName, transformControlsName];
+      return !arr.includes(child.name);
+    });
 
     const boxHelper = new THREE.BoxHelper(object, 0xffff00);
+    const tranformControls = new TransformControls(
+      this.state.mainCamera, this.state.renderer.domElement,
+    );
+    tranformControls.name = transformControlsName;
+    tranformControls.attach(object);
+
     boxHelper.name = boxHelperName;
     state.scene.add(boxHelper);
+    state.scene.add(tranformControls);
     state.selectedObject = object;
   },
 };
