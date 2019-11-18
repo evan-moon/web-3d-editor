@@ -4,6 +4,6 @@ export default {
   renderer: null,
   currentObjects: [],
   controls: null,
-  isShowGridHelper: true,
+  isShowGridHelper: false,
   selectedObject: null,
 };
