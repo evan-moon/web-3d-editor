@@ -1,5 +1,7 @@
 # web-3d-editor
 
+![](./image.png)
+
 ## Project setup
 ```
 npm install
