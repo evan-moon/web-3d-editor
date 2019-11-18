@@ -1,4 +1,6 @@
-# web-3d-editor
+# Web 3D Editor
+
+> Add Lights, Textures, Background, everythings with WebGL
 
 ![](./image.png)
 
