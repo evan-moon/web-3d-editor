@@ -77,7 +77,6 @@ export default {
     if (!state.scene) {
       return;
     }
-    console.log('object is added -> ', object);
     state.scene.add(object);
   },
   [ADD_AMBIENT_LIGHT] (state) {
@@ -116,10 +115,16 @@ export default {
     }
   },
   [SET_SELECTED_OBJECT] (state, object) {
-    if (object && object.userData.selectable) {
-      const boxHelper = new THREE.BoxHelper(object, 0xffff00);
-      state.scene.add(boxHelper);
-      state.selectedObject = object;
+    if (!object || !object.userData.selectable) {
+      return;
     }
+
+    const boxHelperName = 'boxHelper';
+    state.scene.children = state.scene.children.filter(child => child.name !== boxHelperName);
+
+    const boxHelper = new THREE.BoxHelper(object, 0xffff00);
+    boxHelper.name = boxHelperName;
+    state.scene.add(boxHelper);
+    state.selectedObject = object;
   },
 };
