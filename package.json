@@ -14,7 +14,7 @@
     "three-orbit-controls": "^82.1.0",
     "three-transform-controls": "^1.0.4",
     "vue": "^2.6.10",
-    "vuetify": "^2.1.0",
+    "vuetify": "^2.6.10",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
